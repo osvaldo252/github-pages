@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <h1 class="titulo">Mi Galería Especial💕</h1>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+
+.titulo {
+  font-family: 'Great Vibes', cursive;
+  font-size: 48px;
+  text-align: center;
+  color: #ffb6c1; /* Rosa romántico */
+  margin-bottom: 30px;
+  animation: flotar 4s ease-in-out infinite;
+  text-shadow: 0 0 10px rgba(255, 182, 193, 0.6);
+}
+
+@keyframes flotar {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(circle at center, #1a1a1a, #000000);
+      font-family: 'Segoe UI', sans-serif;
+      color: white;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .carrusel {
+      width: 90%;
+      max-width: 1200px;
+      overflow: hidden;
+      cursor: grab;
+    }
+
+    .carrusel:active {
+      cursor: grabbing;
+    }
+
+    .galeria {
+      display: flex;
+      gap: 10px;
+      padding: 20px;
+      transition: transform 0.3s ease;
+    }
+
+    .galeria img {
+      width: 100px;
+      height: 400px;
+      object-fit: cover;
+      flex-grow: 1;
+      border-radius: 10px;
+      opacity: 0.7;
+      transition: 0.4s ease;
+    }
+
+    .galeria img:hover {
+      cursor: pointer;
+      width: 200px;
+      opacity: 1;
+      filter: contrast(120%);
+      z-index: 2;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="carrusel" id="carrusel">
+    <div class="galeria" id="galeria">
+      <!-- Usa rutas válidas o URLs de imágenes -->
+      <img src="c:\Users\apaga\Downloads\nay1.jpg" alt="Imagen 1" />
+      <img src="c:\Users\apaga\Downloads\nay2.jpg" alt="Imagen 2" />
+      <img src="c:\Users\apaga\Downloads\nay3.jpg" alt="Imagen 3" />
+      <img src="c:\Users\apaga\Downloads\nay4.jpg" alt="Imagen 4" />
+      <img src="c:\Users\apaga\Downloads\nay5.jpg" alt="Imagen 5" />
+    </div>
+  </div>
+
+  <script>
+    const carrusel = document.getElementById('carrusel');
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    carrusel.addEventListener('mousedown', (e) => {
+      isDown = true;
+      startX = e.pageX - carrusel.offsetLeft;
+      scrollLeft = carrusel.scrollLeft;
+    });
+
+    carrusel.addEventListener('mouseleave', () => {
+      isDown = false;
+    });
+
+    carrusel.addEventListener('mouseup', () => {
+      isDown = false;
+    });
+
+    carrusel.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - carrusel.offsetLeft;
+      const walk = (x - startX) * 2;
+      carrusel.scrollLeft = scrollLeft - walk;
+    });
+  </script>
+
+</body>
+</html>
